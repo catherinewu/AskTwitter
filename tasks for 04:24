@@ -1,0 +1,22 @@
+tasks for 04/24
+
+Daphne: 
+-handle "who what when where why how" questions -- reformulate
+	ideas:
+		-"who": make sure there's a person's name
+		-"what": ??
+		-"when": search for date (month, day, and/or year)
+		-"where": do we need place??
+		-"why":
+		-"how":
+-add backoff scheme
+
+Catherine: 
+-find good noun phrase parser -- add function for this
+-handle "is" questions -- reformulate 
+	-use word2vec/synsets to find synonyms/antonyms for adjectives
+-look into querying all fields of Advanced Search
+-backoff scheme
+
+
+
