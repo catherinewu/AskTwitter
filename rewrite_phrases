@@ -1,0 +1,29 @@
+example questions:
+	who should be the next president?
+	who is the best dancer?
+	is chicago pretty?
+	how should i respond to someone asking me on a date?
+	is global warming real?
+	is global warming a myth?- how will we make it so that these questions have the same 							answer?
+	how should obama respond to netanyahu's remarks?
+	how should obama respond to netanyahu's wife?
+	what is the best restaurant? 
+	do unicorns exist? 
+
+
+
+t1 = drop how, put word right after how (and word after that if it's a tense) after the 			NP right after that, drop question mark
+
+who question: named entity recognition after getting results
+
+adj: synset command from textblob (or word2vec eg pretty-> beautiful, ... )
+
+rule out tweets with a question mark
+
+keyword search: 
+
+pluralize/singularize
+
+objectivity rating: let users decide whether they want opi
+
+spelling correction
