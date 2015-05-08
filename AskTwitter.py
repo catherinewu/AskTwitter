@@ -13,7 +13,11 @@ def main():
  why = "why"
  query = ""
  found = False 
- if firstWord.lower() == who.lower(): 
+
+ if line.lower() == "what is the meaning of life?":
+ 	print "42"
+
+ elif firstWord.lower() == who.lower(): 
  	query = rewriteQuestion(line)
  	if query != "":
  		query = "\"" + query + "\""

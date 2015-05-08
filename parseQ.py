@@ -18,20 +18,32 @@ def findAnswer(line):
 	#print tree
 		
 	#rewrite = ""
+	i = 0;
 	query = ""
+	query1 = ""
+	query2 = ""
 	np = ""
 	firstnp = False
 	for subtree in tree.subtrees():
 		#print subtree
 		if subtree.label() == 'NP':
 			#print "found"
+			i = i + 1
 			np = ""
 			for tag in subtree:
 				np = np + " " + tag[0]
 			query = query + " AND " + "\"" + np[1:] + "\""
+			if i == 1:
+				query1 = query1 + " AND " + "\"" + np[1:] + "\""
+				query2 = query2 + " AND " + "\"" + np[1:] + "\""
+			elif i == 2:
+				query2 = query2 + " AND " + "\"" + np[1:] + "\""
 				#rewrite = ""
 	query = query[4:]
-	adjAdv = ""
+	query1 = query1[4:]
+	query2 = query2[4:]
+
+	#adjAdv = ""
 
 	#for item in nltk.pos_tag(tokens):
 	#	if (str(item[1]) == "RB" or str(item[1]) == 'JJ' or str(item[1]) == 'JJR' or str(item[1]) == 'JJS'):
@@ -44,14 +56,34 @@ def findAnswer(line):
 	#query = query + adjAdv #+ " , not"
 	#print "Final Query: " + query
 
-	
 	responses = returnTweets(query)
 	if responses:
 		found = True
-		print responses[0]
+		tweet = responses[0]
+		print tweet.user.screen_name + ' (' + tweet.created_at + ')'
+   		print tweet.text.encode('utf-8')
+   		print ''
 
-	if not responses:
-		responses = returnTweets 
+	if not found:
+		responses = returnTweets(query2)
+		if responses: 
+			found = True
+			tweet = responses[0]
+			print tweet.user.screen_name + ' (' + tweet.created_at + ')'
+   			print tweet.text.encode('utf-8')
+   			print ''
+
+   	if not found:
+   		responses = returnTweets(query1)
+		if responses: 
+			found = True
+			tweet = responses[0]
+			print tweet.user.screen_name + ' (' + tweet.created_at + ')'
+   			print tweet.text.encode('utf-8')
+   			print ''
+
+   	if not found:
+		print "not found. try again. sry not sry" 
 
 	
 #select shorter responses

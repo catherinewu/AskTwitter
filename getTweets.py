@@ -16,13 +16,14 @@ api = twitter.Api(
 
 def returnTweets(searchTerms):
   search = api.GetSearch(term= searchTerms , lang='en', result_type='recent', count=10, max_id='')
-  print type(search)
-  for t in search:
-   pp.pprint(t)  
-   print t.user.screen_name + ' (' + t.created_at + ')'
-   #Add the .encode to force encoding
-   print t.text.encode('utf-8')
-   print ''
+  return search
+  #print type(search)
+  #for t in search:
+   #pp.pprint(t)  
+   #print t.user.screen_name + ' (' + t.created_at + ')'
+   ##Add the .encode to force encoding
+   #print t.text.encode('utf-8')
+   #print ''
 
 #def returnTweetsIS(searchTerms):
 #  search = api.GetSearch(term= searchTerms , lang='en', result_type='recent', count=10, max_id='')
