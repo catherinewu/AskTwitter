@@ -1,11 +1,16 @@
 import nltk
 from getTweets import returnTweets
+import urllib3
+import requests
+requests.packages.urllib3.disable_warnings()
 
 def findAnswer(line):
+
+	line = line[0].lower() + line[1:]
 	found = False
 	grammar = r"""
 	  NP: {<PP\$>?<JJ|JJS>*<NN>*}   # chunk determiner/possessive, adjectives and noun
-	      {<NNP|VBN>+}                # chunk sequences of proper nouns
+	      {<NNP|NNS|NN|NNPS|VBN>+}                # chunk sequences of proper nouns
 	"""
 	cp = nltk.RegexpParser(grammar)
 
@@ -51,7 +56,8 @@ def findAnswer(line):
 	#		print item[0]
 	#		adjAdv = adjAdv + " OR " + item[0]
 
-	print "Query: " + query
+	#print "Query: " + query
+
 	#print "Adj + Adv: " + adjAdv
 	#query = query + adjAdv #+ " , not"
 	#print "Final Query: " + query
@@ -83,7 +89,7 @@ def findAnswer(line):
    			print ''
 
    	if not found:
-		print "not found. try again. sry not sry" 
+		print "No results found. Please try again." 
 
 	
 #select shorter responses

@@ -2,6 +2,9 @@
 from getTweets import returnTweets
 from Rewrite import rewriteQuestion
 from parseQ import findAnswer
+from postprocess import postprocess
+import urllib3
+urllib3.disable_warnings()
 
 def main():
  line = raw_input("Enter Question: ")
@@ -21,31 +24,47 @@ def main():
  	query = rewriteQuestion(line)
  	if query != "":
  		query = "\"" + query + "\""
- 		returnTweets(query)
+ 		allTweets = returnTweets(query)
+ 		found = postprocess(firstWord.lower(), allTweets)
+ 	if not found:
+ 		#print "hi"
+ 		findAnswer(line)
 
  elif firstWord.lower() == what.lower():
  	rewriteQuestion(line)
  	if query != "":
  		query = "\"" + query + "\""
- 		returnTweets(query)
+ 		allTweets = returnTweets(query)
+ 		found = postprocess(firstWord.lower(), allTweets)
+ 	if not found: 
+ 		findAnswer(line)
 
  elif firstWord.lower() == when.lower():
  	rewriteQuestion(line)
  	if query != "":
  		query = "\"" + query + "\""
- 		returnTweets(query)
+ 		allTweets = returnTweets(query)
+ 		found = postprocess(firstWord.lower(), allTweets)
+ 	if not found:
+ 		findAnswer(line)
 
  elif firstWord.lower() == where.lower():
  	rewriteQuestion(line)
  	if query != "":
  		query = "\"" + query + "\""
- 		returnTweets(query)
+ 		allTweets = returnTweets(query)
+ 		found = postprocess(firstWord.lower(), allTweets)
+ 	if not found:
+ 		findAnswer(line)
 
  elif firstWord.lower() == why.lower():
  	rewriteQuestion(line)
  	if query != "":
  		query = "\"" + query + "\""
- 		returnTweets(query)
+ 		allTweets = returnTweets(query)
+ 		found = postprocess(firstWord.lower(), allTweets)
+ 	if not found:
+ 		findAnswer(line)
 
  else: 
  	findAnswer(line)

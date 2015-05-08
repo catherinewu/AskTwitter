@@ -4,6 +4,8 @@
 import twitter
 import pprint
 import argparse
+import urllib3
+urllib3.disable_warnings()
 
 pp = pprint.PrettyPrinter(indent = 4)
 

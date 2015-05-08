@@ -34,7 +34,7 @@ def rewriteQuestion(line):
 			while tokens[i] != firstwd[0]:
 				rewrite = rewrite + " " + tokens[i]
 				i = i + 1
-			print(rewrite)
+			#print(rewrite)
 			return rewrite
 	#else push to is-question paradigm
 
