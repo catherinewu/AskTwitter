@@ -26,27 +26,21 @@ for subtree in tree.subtrees():
 		np = ""
 		for tag in subtree:
 			np = np + " " + tag[0]
-		query = query + ", " + np
+		query = query + " AND " + "\"" + np + "\""
 			#rewrite = ""
-query = query[2:]
+query = query[4:]
 adjAdv = ""
-#i = 0
-print line
-for item in nltk.pos_tag(tokens):
-	#i = i + 1
-	#sentence = sentence + str(item[0]) + " " + str(item[1]) + " "
-	#print item[0]
-	if (str(item[1]) == "RB" or str(item[1]) == 'JJ' or str(item[1]) == 'JJR' or str(item[1]) == 'JJS'):
-		print "found adjectives or adverbs: "
-		print item[0]
-		adjAdv = adjAdv + ", " + item[0]
-	#print item[1]
-	#print i
+
+#for item in nltk.pos_tag(tokens):
+#	if (str(item[1]) == "RB" or str(item[1]) == 'JJ' or str(item[1]) == 'JJR' or str(item[1]) == 'JJS'):
+#		print "found adjectives or adverbs: "
+#		print item[0]
+#		adjAdv = adjAdv + " OR " + item[0]
 
 print "Query: " + query
-print "Adj + Adv: " + adjAdv
-query = query + adjAdv
-print "Final Query: " + query
+#print "Adj + Adv: " + adjAdv
+#query = query + adjAdv #+ " , not"
+#print "Final Query: " + query
 returnTweetsIS(query)
 
 	
