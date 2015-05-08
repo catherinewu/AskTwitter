@@ -8,6 +8,7 @@ for i,j in enumerate(wn.synsets('dog')):
   print "Meaning",i, "NLTK ID:", j.name()
   print "Definition:",j.definition()
 
+
 #thesaurus
 for i,j in enumerate(wn.synsets('dog')):
   print "Meaning",i, "NLTK ID:", j.name()
