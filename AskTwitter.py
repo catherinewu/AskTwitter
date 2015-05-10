@@ -22,7 +22,8 @@ def main():
 
  elif firstWord.lower() == who.lower(): 
  	query = rewriteQuestion(line)
- 	if query != "":
+ 	#print type(query)
+ 	if query != "none":
  		query = "\"" + query + "\""
  		allTweets = returnTweets(query)
  		found = postprocess(firstWord.lower(), allTweets)
@@ -32,7 +33,7 @@ def main():
 
  elif firstWord.lower() == what.lower():
  	rewriteQuestion(line)
- 	if query != "":
+ 	if query != "none":
  		query = "\"" + query + "\""
  		allTweets = returnTweets(query)
  		found = postprocess(firstWord.lower(), allTweets)
@@ -41,7 +42,7 @@ def main():
 
  elif firstWord.lower() == when.lower():
  	rewriteQuestion(line)
- 	if query != "":
+ 	if query != "none":
  		query = "\"" + query + "\""
  		allTweets = returnTweets(query)
  		found = postprocess(firstWord.lower(), allTweets)
@@ -50,7 +51,7 @@ def main():
 
  elif firstWord.lower() == where.lower():
  	rewriteQuestion(line)
- 	if query != "":
+ 	if query != "none":
  		query = "\"" + query + "\""
  		allTweets = returnTweets(query)
  		found = postprocess(firstWord.lower(), allTweets)
@@ -59,7 +60,7 @@ def main():
 
  elif firstWord.lower() == why.lower():
  	rewriteQuestion(line)
- 	if query != "":
+ 	if query != "none":
  		query = "\"" + query + "\""
  		allTweets = returnTweets(query)
  		found = postprocess(firstWord.lower(), allTweets)

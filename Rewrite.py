@@ -38,5 +38,9 @@ def rewriteQuestion(line):
 			return rewrite
 	#else push to is-question paradigm
 
+	else:
+		return "none"
+
+
 
 

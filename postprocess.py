@@ -28,7 +28,7 @@ def postprocess(qtype, tweetlist):
 		if tag[0].isdigit():
 			score = score + 1
 		#LS = list item marker, weighted less heavily than other types of markers
-		if tag[1] == LS:
+		if tag[1] == 'LS':
 			score = score + 1
 	
 
