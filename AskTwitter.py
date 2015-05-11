@@ -15,6 +15,7 @@ from postprocess import postprocessWhoWhere
 import urllib3
 urllib3.disable_warnings()
 
+# accept a user question and then return a tweet that best answers the question
 def main():
  line = raw_input("Enter Question: ")
  firstWord = line.partition(' ')[0]
@@ -26,7 +27,7 @@ def main():
  	print "42"
 
  elif firstWord.lower() in wQuestions: 
- 	print "in wQuestions"
+ 	#print "in wQuestions"
  	query = rewriteQuestion(line)
  	plainQuery = query[1:]
  	#print type(query)
@@ -34,13 +35,13 @@ def main():
  		query = "\"" + query[1:] + "\""
  		allTweets = returnTweets(query)
  		if firstWord.lower() == "who" or firstWord.lower() == "where":
- 			print "postprocessWhoWhere"
- 			print "query is" + plainQuery
+ 			#print "postprocessWhoWhere"
+ 			#print "query is" + plainQuery
  			found = postprocessWhoWhere(allTweets, plainQuery)
  		else:
  			found = postprocess(firstWord.lower(), allTweets, query)
  	if not found:
- 		print "hi"
+ 		#print "hi"
  		findAnswer(line)
 
  else: 

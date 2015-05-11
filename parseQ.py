@@ -13,9 +13,13 @@ import urllib3
 import requests
 requests.packages.urllib3.disable_warnings()
 
+# parse the question for noun phrases and query the database for the intersection of all noun phrases. 
+# if no results are returned, retry the search with fewer noun phrases until tweets are found
+
 def findAnswer(line):
 
 	line = line[0].lower() + line[1:]
+	#firstWord = line.partition(' ')[0]
 	found = False
 	grammar = r"""
 	  NP: {<PP\$>?<JJ|JJS>*<NN>*}   # chunk determiner/possessive, adjectives and noun
@@ -62,7 +66,7 @@ def findAnswer(line):
 	#		print item[0]
 	#		adjAdv = adjAdv + " OR " + item[0]
 
-	print "Query: " + query
+	#print "Query: " + query
 
 	#print "Adj + Adv: " + adjAdv
 	#query = query + adjAdv #+ " , not"
@@ -78,8 +82,8 @@ def findAnswer(line):
 
 	if not found:
 		responses = returnTweets(query2)
-		print query2
-		print responses
+		#print query2
+		#print responses
 		if responses: 
 			found = True
 			tweet = responses[0]
@@ -88,9 +92,9 @@ def findAnswer(line):
    			print ''
 
    	if not found:
-   		print query1
+   		#print query1
    		responses = returnTweets(query1)
-   		print responses
+   		#print responses
 		if responses: 
 			found = True
 			tweet = responses[0]
@@ -99,7 +103,7 @@ def findAnswer(line):
    			print ''
 
    	if not found:
-		print "No results found. Please try again." 
+		print "No results found. Please reword your question and try again." 
 
 	
 #select shorter responses

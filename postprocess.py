@@ -10,12 +10,13 @@ import sys
 import nltk
 import twitter
 
+# tries to find a tweet where the rewritten query is the start of the tweet
 def postprocessWhoWhere(tweetlist, query):
 	if not tweetlist:
 		return False
 	found = False
-	print "query in postprocessWHO"
-	print query
+	#print "query in postprocessWHO"
+	#print query
 	for tweet in tweetlist:
 		#print "possible tweet: "
 		#print tweet.text.encode('utf-8')
@@ -33,11 +34,12 @@ def postprocessWhoWhere(tweetlist, query):
 	   	print ''
    	return found
 
+# not used yet
 def postprocessIS(tweetlist, rewrite):
 	for tweet in tweetlist:
 		print tweet.text.encode('utf-8')
 
-
+# post process when, what, where questions with scoring 
 def postprocess(qtype, tweetlist, query):
 
 	def otherq(tag, score):
@@ -64,8 +66,7 @@ def postprocess(qtype, tweetlist, query):
 		if tag[1] == 'LS':
 			score = score + 1
 
-	
-
+	# iterate through the tweets and score each one
 	score = 0
 	scorelist = []
 	for tweet in tweetlist:
