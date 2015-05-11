@@ -1,4 +1,9 @@
-# from https://grahamnic.wordpress.com/2013/09/15/python-using-the-twitter-api-to-datamine/
+#
+# getTweets.py
+# Created by Catherine Wu and Daphne Weinstein
+#
+# Queries the Twitter API with specified searchTerms and returns 10 tweets
+#
 
 #!/usr/bin/env python
 import twitter
@@ -7,7 +12,7 @@ import argparse
 import urllib3
 urllib3.disable_warnings()
 
-pp = pprint.PrettyPrinter(indent = 4)
+#pp = pprint.PrettyPrinter(indent = 4)
 
 api = twitter.Api(
  consumer_key='RtIcNj1NuW7xdysLrhLEc2vk2',
@@ -16,6 +21,7 @@ api = twitter.Api(
  access_token_secret='0baNJ7vqjK66sPMeTulX1utBainbnzrbt22c3pQ6qiq1m'
  )
 
+# Queries the Twitter API with searchTerms and returns 10 tweets
 def returnTweets(searchTerms):
   search = api.GetSearch(term= searchTerms , lang='en', result_type='recent', count=10, max_id='')
   return search
@@ -27,13 +33,3 @@ def returnTweets(searchTerms):
    #print t.text.encode('utf-8')
    #print ''
 
-#def returnTweetsIS(searchTerms):
-#  search = api.GetSearch(term= searchTerms , lang='en', result_type='recent', count=10, max_id='')
-#  for t in search:
-#   pp.pprint(t)  
-#   print t.user.screen_name + ' (' + t.created_at + ')'
-#   #Add the .encode to force encoding
-#   print t.text.encode('utf-8')
-#   print ''
-
-  

@@ -1,11 +1,44 @@
-# usage: python postscan_entities.py questiontype answers.txt
+#
+# postprocess.py
+# Created by Catherine Wu and Daphne Weinstein
+#
+# After a set of tweets are returned, this program post processes the results according
+# to the question type in order to return the best answer
+#
 
 import sys
 import nltk
 import twitter
 
+def postprocessWhoWhere(tweetlist, query):
+	if not tweetlist:
+		return False
+	found = False
+	print "query in postprocessWHO"
+	print query
+	for tweet in tweetlist:
+		#print "possible tweet: "
+		#print tweet.text.encode('utf-8')
+		if tweet.text.encode('utf-8').startswith(query):
+			if found == False:
+				found = True
+				print tweet.user.screen_name + ' (' + tweet.created_at + ')'
+	   			print tweet.text.encode('utf-8')
+	   			print ''
+	if found == False:
+		found = True
+		print "not found so printing first result"
+		print tweet.user.screen_name + ' (' + tweet.created_at + ')'
+	   	print tweet.text.encode('utf-8')
+	   	print ''
+   	return found
 
-def postprocess(qtype, tweetlist):
+def postprocessIS(tweetlist, rewrite):
+	for tweet in tweetlist:
+		print tweet.text.encode('utf-8')
+
+
+def postprocess(qtype, tweetlist, query):
 
 	def otherq(tag, score):
 		if tag == 'NNP' or tag == 'NNPS':
@@ -30,6 +63,7 @@ def postprocess(qtype, tweetlist):
 		#LS = list item marker, weighted less heavily than other types of markers
 		if tag[1] == 'LS':
 			score = score + 1
+
 	
 
 	score = 0

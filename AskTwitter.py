@@ -1,70 +1,46 @@
-# Run this program to get a tweet that answers a question
+#
+# getTweets.py
+# Created by Catherine Wu and Daphne Weinstein
+#
+# Usage: python AskTwitter.py
+# Then, the user will be prompted to enter a question. Type a question and then press enter. 
+# The twitter response will appear in the user's terminal. 
+#
+
 from getTweets import returnTweets
 from Rewrite import rewriteQuestion
 from parseQ import findAnswer
 from postprocess import postprocess
+from postprocess import postprocessWhoWhere
 import urllib3
 urllib3.disable_warnings()
 
 def main():
  line = raw_input("Enter Question: ")
  firstWord = line.partition(' ')[0]
- who = "who"
- what = "what"
- when = "when"
- where = "where"
- why = "why"
+ wQuestions = ["who", "what", "when", "where", "why"]
  query = ""
  found = False 
 
  if line.lower() == "what is the meaning of life?":
  	print "42"
 
- elif firstWord.lower() == who.lower(): 
+ elif firstWord.lower() in wQuestions: 
+ 	print "in wQuestions"
  	query = rewriteQuestion(line)
+ 	plainQuery = query[1:]
  	#print type(query)
  	if query != "none":
- 		query = "\"" + query + "\""
+ 		query = "\"" + query[1:] + "\""
  		allTweets = returnTweets(query)
- 		found = postprocess(firstWord.lower(), allTweets)
+ 		if firstWord.lower() == "who" or firstWord.lower() == "where":
+ 			print "postprocessWhoWhere"
+ 			print "query is" + plainQuery
+ 			found = postprocessWhoWhere(allTweets, plainQuery)
+ 		else:
+ 			found = postprocess(firstWord.lower(), allTweets, query)
  	if not found:
- 		#print "hi"
- 		findAnswer(line)
-
- elif firstWord.lower() == what.lower():
- 	rewriteQuestion(line)
- 	if query != "none":
- 		query = "\"" + query + "\""
- 		allTweets = returnTweets(query)
- 		found = postprocess(firstWord.lower(), allTweets)
- 	if not found: 
- 		findAnswer(line)
-
- elif firstWord.lower() == when.lower():
- 	rewriteQuestion(line)
- 	if query != "none":
- 		query = "\"" + query + "\""
- 		allTweets = returnTweets(query)
- 		found = postprocess(firstWord.lower(), allTweets)
- 	if not found:
- 		findAnswer(line)
-
- elif firstWord.lower() == where.lower():
- 	rewriteQuestion(line)
- 	if query != "none":
- 		query = "\"" + query + "\""
- 		allTweets = returnTweets(query)
- 		found = postprocess(firstWord.lower(), allTweets)
- 	if not found:
- 		findAnswer(line)
-
- elif firstWord.lower() == why.lower():
- 	rewriteQuestion(line)
- 	if query != "none":
- 		query = "\"" + query + "\""
- 		allTweets = returnTweets(query)
- 		found = postprocess(firstWord.lower(), allTweets)
- 	if not found:
+ 		print "hi"
  		findAnswer(line)
 
  else: 

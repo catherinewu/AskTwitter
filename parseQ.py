@@ -1,3 +1,12 @@
+#
+# parseQ.py
+# Created by Catherine Wu and Daphne Weinstein
+#
+# If the question is not of the form who/what/when/where/why or if rewrite fails on the question
+# (generally due to the presence of too many noun phrases), call findAnswer() which will return
+# the best answer based on keyword search to the Twitter API
+#
+
 import nltk
 from getTweets import returnTweets
 import urllib3
@@ -13,9 +22,6 @@ def findAnswer(line):
 	      {<NNP|NNS|NN|NNPS|VBN>+}                # chunk sequences of proper nouns
 	"""
 	cp = nltk.RegexpParser(grammar)
-
-	#line = raw_input("Enter Question: ")
-
 	tokens = nltk.word_tokenize(line)
 	tags = nltk.pos_tag(tokens)
 	tree = cp.parse(tags)
@@ -56,7 +62,7 @@ def findAnswer(line):
 	#		print item[0]
 	#		adjAdv = adjAdv + " OR " + item[0]
 
-	#print "Query: " + query
+	print "Query: " + query
 
 	#print "Adj + Adv: " + adjAdv
 	#query = query + adjAdv #+ " , not"
@@ -72,6 +78,8 @@ def findAnswer(line):
 
 	if not found:
 		responses = returnTweets(query2)
+		print query2
+		print responses
 		if responses: 
 			found = True
 			tweet = responses[0]
@@ -80,7 +88,9 @@ def findAnswer(line):
    			print ''
 
    	if not found:
+   		print query1
    		responses = returnTweets(query1)
+   		print responses
 		if responses: 
 			found = True
 			tweet = responses[0]
