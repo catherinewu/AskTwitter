@@ -17,8 +17,8 @@ def rewriteQuestion(line):
 
 	# use the grammar to find noun phrases
 	grammar = r"""
-	  NP: {<PP\$>?<JJ|JJS>*<NN>*}   # chunk determiner/possessive, adjectives and noun
-	      {<NNP|NNS|NN|NNPS|VBN>+}                # chunk sequences of proper nouns
+	  NP: {<DT\$>?<JJ|JJS>*<NN>*}   # chunk determiner/possessive, adjectives and noun
+	      {<NNP|NNS|NN|NNPS>+}                # chunk sequences of proper nouns
 	"""
 	cp = nltk.RegexpParser(grammar)
 	tokens = nltk.word_tokenize(line)
@@ -37,10 +37,12 @@ def rewriteQuestion(line):
 				firstnp = True
 				for tag in subtree:
 					rewrite = rewrite + " " + tag[0]
-
+			if len(rewrite) < 3:
+				firstnp == False
+				rewrite = ""
+	#print(npnum)
 	# if there is only one noun phrase, rewrite the question into answer form and return the rewrite
 	if npnum == 1:
-		#print "hi"
 		i = 1
 		firstwd = nltk.word_tokenize(rewrite)
 		if len(firstwd) > 0:
@@ -50,12 +52,27 @@ def rewriteQuestion(line):
 				i = i + 1
 			#print "rewrite"
 			#print(rewrite)
+			
 			return rewrite
+	#START SUSPECT CODE====================================================================
+	#print(tokens[0])
+	elif tokens[0].lower() == "is":
+		#print tags[len(tokens) - 2][1]
+		if tags[len(tokens) - 3][1] == "DT":
+			rewrite =  "\"" + rewrite + " " + " is " + tokens[len(tokens) - 3] + " " + tokens[len(tokens) - 2] + "\"" + " OR " + "\"" + rewrite + " " + " isn't " + tokens[len(tokens) - 3] + " " + tokens[len(tokens) - 2] + "\""
+		elif tags[len(tokens) - 4][1] == "DT":
+			rewrite =  "\"" + rewrite + " " + " is " + tokens[len(tokens) - 4] + " "+ tokens[len(tokens) - 3] + " " + tokens[len(tokens) - 2] + "\"" + " OR " + "\"" + rewrite + " " + " isn't " + tokens[len(tokens) - 4] + " " + tokens[len(tokens) - 3] + " " + tokens[len(tokens) - 2] + "\""
+		else:
+			rewrite = "\"" + rewrite + " " + " is " + tokens[len(tokens) - 2] + "\"" + " OR " + "\"" + rewrite + " " + " isn't " + tokens[len(tokens) - 2] + "\""
+		return rewrite
+			#END SUSPECT CODE====================================================================
 
 	# otherwise, return "none" so that the question can be handled with the back-off scheme
 	else:
 		#print "none"
 		return "none"
+
+	
 
 
 

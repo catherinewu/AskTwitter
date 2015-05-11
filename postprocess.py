@@ -11,7 +11,7 @@ import nltk
 import twitter
 
 # tries to find a tweet where the rewritten query is the start of the tweet
-def postprocessWhoWhere(tweetlist, query):
+def postprocessWhoWhereWhat(tweetlist, query):
 	if not tweetlist:
 		return False
 	found = False
@@ -79,7 +79,7 @@ def postprocess(qtype, tweetlist, query):
 				whenq(tag, score)	
 			else:
 				otherq(tag[1], score)	
-		scorelist.append(score)
+		scorelist.append(score - (len(response)/140))
 		score = 0
 	scorelist.append(0)
 

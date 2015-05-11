@@ -54,31 +54,41 @@ def findAnswer(line):
 			elif i == 2:
 				query2 = query2 + " AND " + "\"" + np[1:] + "\""
 				#rewrite = ""
+	queryAdj = query[4:]
 	query = query[4:]
 	query1 = query1[4:]
 	query2 = query2[4:]
 
-	#adjAdv = ""
+	adjAdv = ""
 
-	#for item in nltk.pos_tag(tokens):
-	#	if (str(item[1]) == "RB" or str(item[1]) == 'JJ' or str(item[1]) == 'JJR' or str(item[1]) == 'JJS'):
-	#		print "found adjectives or adverbs: "
-	#		print item[0]
-	#		adjAdv = adjAdv + " OR " + item[0]
+	for item in nltk.pos_tag(tokens):
+		if (str(item[1]) == "RB" or str(item[1]) == 'JJ' or str(item[1]) == 'JJR' or str(item[1]) == 'JJS'):
+			#print "found adjectives or adverbs: "
+			#print item[0]
+			adjAdv = adjAdv + " AND " + "\"" + item[0] + "\""
 
 	#print "Query: " + query
 
 	#print "Adj + Adv: " + adjAdv
-	#query = query + adjAdv #+ " , not"
+	queryAdj = queryAdj + adjAdv #+ " , not"
 	#print "Final Query: " + query
 
-	responses = returnTweets(query)
+	responses = returnTweets(queryAdj)
 	if responses:
 		found = True
 		tweet = responses[0]
 		print tweet.user.screen_name + ' (' + tweet.created_at + ')'
    		print tweet.text.encode('utf-8')
    		print ''
+
+	if not found:
+		responses = returnTweets(query)
+		if responses:
+			found = True
+			tweet = responses[0]
+			print tweet.user.screen_name + ' (' + tweet.created_at + ')'
+	   		print tweet.text.encode('utf-8')
+	   		print ''
 
 	if not found:
 		responses = returnTweets(query2)
@@ -103,7 +113,7 @@ def findAnswer(line):
    			print ''
 
    	if not found:
-		print "No results found. Please reword your question and try again." 
+		print "No results found. Please check the spelling in the question. If that is not the issue, then please reword your question and try again." 
 
 	
 #select shorter responses
