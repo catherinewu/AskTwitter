@@ -17,12 +17,13 @@ def rewriteQuestion(line):
 
 	# use the grammar to find noun phrases
 	grammar = r"""
-	  NP: {<DT\$>?<JJ|JJS>*<NN>*}   # chunk determiner/possessive, adjectives and noun
+	  NP: {<DT>*<JJ|JJS>*<NN>*}   # chunk determiner/possessive, adjectives and noun
 	      {<NNP|NNS|NN|NNPS>+}                # chunk sequences of proper nouns
 	"""
 	cp = nltk.RegexpParser(grammar)
 	tokens = nltk.word_tokenize(line)
 	tags = nltk.pos_tag(tokens)
+	#print(tags)
 
 	# rewrite the question with the first noun phrase
 	rewrite = ""

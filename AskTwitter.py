@@ -11,7 +11,7 @@ from getTweets import returnTweets
 from Rewrite import rewriteQuestion
 from parseQ import findAnswer
 from postprocess import postprocess
-from postprocess import postprocessWhoWhere
+from postprocess import postprocessWhoWhereWhat
 import urllib3
 urllib3.disable_warnings()
 
@@ -29,15 +29,16 @@ def main():
  elif firstWord.lower() in wQuestions: 
  	#print "in wQuestions"
  	query = rewriteQuestion(line)
+
  	plainQuery = query[1:]
- 	#print type(query)
  	if query != "none":
- 		query = "\"" + query[1:] + "\""
+ 		query = "\"" + query + "\""
+ 		print(query)
  		allTweets = returnTweets(query)
  		if firstWord.lower() == "who" or firstWord.lower() == "where":
  			#print "postprocessWhoWhere"
  			#print "query is" + plainQuery
- 			found = postprocessWhoWhere(allTweets, plainQuery)
+ 			found = postprocessWhoWhereWhat(allTweets, plainQuery)
  		else:
  			found = postprocess(firstWord.lower(), allTweets, query)
  	if not found:

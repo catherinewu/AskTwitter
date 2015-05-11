@@ -20,7 +20,7 @@ def postprocessWhoWhereWhat(tweetlist, query):
 	for tweet in tweetlist:
 		#print "possible tweet: "
 		#print tweet.text.encode('utf-8')
-		if tweet.text.encode('utf-8').startswith(query):
+		if tweet.text.encode('utf-8').lower().startswith(query):
 			if found == False:
 				found = True
 				print tweet.user.screen_name + ' (' + tweet.created_at + ')'
@@ -28,7 +28,7 @@ def postprocessWhoWhereWhat(tweetlist, query):
 	   			print ''
 	if found == False:
 		found = True
-		print "not found so printing first result"
+		#print "not found so printing first result"
 		print tweet.user.screen_name + ' (' + tweet.created_at + ')'
 	   	print tweet.text.encode('utf-8')
 	   	print ''

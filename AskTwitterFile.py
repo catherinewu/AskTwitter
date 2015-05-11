@@ -35,7 +35,7 @@ def main():
 	 	plainQuery = query[1:]
 	 	print(query)
 	 	if query != "none":
-	 		query = "\"" + query[1:] + "\""
+	 		query = "\"" + query + "\""
 	 		allTweets = returnTweets(query)
 	 		if firstWord.lower() == "who" or firstWord.lower() == "where" or firstWord.lower() == "what":
 	 			#print "postprocessWhoWhere"
